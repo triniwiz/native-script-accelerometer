@@ -13,10 +13,10 @@ export function startAccelometerUpdates(callback: (AccelomenterData) => void) {
 
     if (!accMnager) {
         accMnager = CMMotionManager.alloc().init();
-        accMnager.accelerometerUpdateInterval = 1;
+        accMnager.accelerometerUpdateInterval = 0.1;
     }
 
-    if (accMnager.isAccelerometerAvailable) {
+    if (accMnager.accelerometerAvailable) {
         var queue = NSOperationQueue.alloc().init();
         accMnager.startAccelerometerUpdatesToQueueWithHandler(queue, (data, error) => {
             callback({

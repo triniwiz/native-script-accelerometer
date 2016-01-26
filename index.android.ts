@@ -2,6 +2,7 @@ import application = require('application');
 declare var android: any;
 interface AccelomenterData { x: number; y: number; z: number };
 
+const baseAcceleration = 9.81;
 var sensorListener;
 var sensorManager;
 var accelometerSensor
@@ -38,9 +39,9 @@ export function startAccelometerUpdates(callback: (AccelomenterData) => void) {
         },
         onSensorChanged: (event) => {
             callback({
-                x: event.values[0],
-                y: event.values[1],
-                z: event.values[2]
+                x: event.values[0] / baseAcceleration,
+                y: event.values[1] / baseAcceleration,
+                z: event.values[2] / baseAcceleration
             })
         }
     });

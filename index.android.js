@@ -1,5 +1,6 @@
 var application = require('application');
 ;
+var baseAcceleration = 9.81;
 var sensorListener;
 var sensorManager;
 var accelometerSensor;
@@ -28,9 +29,9 @@ function startAccelometerUpdates(callback) {
         },
         onSensorChanged: function (event) {
             callback({
-                x: event.values[0],
-                y: event.values[1],
-                z: event.values[2]
+                x: event.values[0] / baseAcceleration,
+                y: event.values[1] / baseAcceleration,
+                z: event.values[2] / baseAcceleration
             });
         }
     });
