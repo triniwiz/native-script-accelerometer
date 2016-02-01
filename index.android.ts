@@ -1,14 +1,14 @@
 import application = require('application');
 declare var android: any;
-interface AccelomenterData { x: number; y: number; z: number };
+interface AccelerometerData { x: number; y: number; z: number };
 
 const baseAcceleration = 9.81;
 var sensorListener;
 var sensorManager;
-var accelometerSensor
-export function startAccelometerUpdates(callback: (AccelomenterData) => void) {
+var accelerometerSensor;
+export function startAccelerometerUpdates(callback: (AccelerometerData) => void) {
     if (sensorListener) {
-        throw new Error("Already listetning for accelometer updates.")
+        throw new Error("Already listening for accelerometer updates.")
     }
 
     var activity = application.android.foregroundActivity;
@@ -26,10 +26,10 @@ export function startAccelometerUpdates(callback: (AccelomenterData) => void) {
         }
     }
 
-    if (!accelometerSensor) {
-        accelometerSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_ACCELEROMETER);
-        if (!accelometerSensor) {
-            throw Error("Could get accelometer sensor.")
+    if (!accelerometerSensor) {
+        accelerometerSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_ACCELEROMETER);
+        if (!accelerometerSensor) {
+            throw Error("Could get accelerometer sensor.")
         }
     }
 
@@ -48,12 +48,12 @@ export function startAccelometerUpdates(callback: (AccelomenterData) => void) {
 
     sensorManager.registerListener(
         sensorListener,
-        accelometerSensor,
+        accelerometerSensor,
         android.hardware.SensorManager.SENSOR_DELAY_NORMAL
     );
 }
 
-export function stopAccelometerUpdates() {
+export function stopAccelerometerUpdates() {
     if (!sensorListener) {
         throw new Error("Currently not listening for acceleration events.")
     }
