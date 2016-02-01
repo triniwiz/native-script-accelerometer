@@ -1,8 +1,8 @@
 ;
 var accMnager;
-var isListeneing = false;
+var isListening = false;
 function startAccelerometerUpdates(callback) {
-    if (isListeneing) {
+    if (isListening) {
         throw new Error("Already listening for accelerometer updates.");
     }
     if (!accMnager) {
@@ -18,7 +18,7 @@ function startAccelerometerUpdates(callback) {
                 z: data.acceleration.z
             });
         });
-        isListeneing = true;
+        isListening = true;
     }
     else {
         throw new Error("Accelerometer not available.");
@@ -26,10 +26,10 @@ function startAccelerometerUpdates(callback) {
 }
 exports.startAccelerometerUpdates = startAccelerometerUpdates;
 function stopAccelerometerUpdates() {
-    if (!isListeneing) {
+    if (!isListening) {
         throw new Error("Currently not listening for acceleration events.");
     }
     accMnager.stopAccelerometerUpdates();
-    isListeneing = false;
+    isListening = false;
 }
 exports.stopAccelerometerUpdates = stopAccelerometerUpdates;
