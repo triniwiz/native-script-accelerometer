@@ -6,7 +6,7 @@ interface AccelerometerData { x: number; y: number; z: number };
 var accMnager;
 var isListening = false;
 
-export function startAccelerometerUpdates(callback: (AccelomenterData) => void) {
+export function startAccelerometerUpdates(callback: (AccelerometerData) => void) {
     if (isListeneing) {
         throw new Error("Already listening for accelerometer updates.")
     }
