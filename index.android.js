@@ -37,7 +37,7 @@ function startAccelerometerUpdates(callback) {
     });
     sensorManager.registerListener(sensorListener, accelerometerSensor, android.hardware.SensorManager.SENSOR_DELAY_NORMAL);
 }
-exports.startAccelerometerUpdates = startAccelometerUpdates;
+exports.startAccelerometerUpdates = startAccelerometerUpdates;
 function stopAccelerometerUpdates() {
     if (!sensorListener) {
         throw new Error("Currently not listening for acceleration events.");
