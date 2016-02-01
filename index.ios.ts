@@ -1,14 +1,14 @@
 declare var CMMotionManager: any;
 declare var NSOperationQueue: any;
 
-interface AccelomenterData { x: number; y: number; z: number };
+interface AccelerometerData { x: number; y: number; z: number };
 
 var accMnager;
-var isListeneing = false;
+var isListening = false;
 
-export function startAccelometerUpdates(callback: (AccelomenterData) => void) {
-    if (isListeneing) {
-        throw new Error("Already listetning for accelometer updates.")
+export function startAccelerometerUpdates(callback: (AccelerometerData) => void) {
+    if (isListening) {
+        throw new Error("Already listening for accelerometer updates.")
     }
 
     if (!accMnager) {
@@ -26,17 +26,17 @@ export function startAccelometerUpdates(callback: (AccelomenterData) => void) {
             })
         });
 
-        isListeneing = true;
+        isListening = true;
     } else {
         throw new Error("Accelerometer not available.")
     }
 }
 
-export function stopAccelometerUpdates() {
-    if (!isListeneing) {
+export function stopAccelerometerUpdates() {
+    if (!isListening) {
         throw new Error("Currently not listening for acceleration events.")
     }
 
     accMnager.stopAccelerometerUpdates();
-    isListeneing = false;
+    isListening = false;
 }

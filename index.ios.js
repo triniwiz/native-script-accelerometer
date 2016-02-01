@@ -1,9 +1,9 @@
 ;
 var accMnager;
-var isListeneing = false;
-function startAccelometerUpdates(callback) {
-    if (isListeneing) {
-        throw new Error("Already listetning for accelometer updates.");
+var isListening = false;
+function startAccelerometerUpdates(callback) {
+    if (isListening) {
+        throw new Error("Already listening for accelerometer updates.");
     }
     if (!accMnager) {
         accMnager = CMMotionManager.alloc().init();
@@ -18,18 +18,18 @@ function startAccelometerUpdates(callback) {
                 z: data.acceleration.z
             });
         });
-        isListeneing = true;
+        isListening = true;
     }
     else {
         throw new Error("Accelerometer not available.");
     }
 }
-exports.startAccelometerUpdates = startAccelometerUpdates;
-function stopAccelometerUpdates() {
-    if (!isListeneing) {
+exports.startAccelerometerUpdates = startAccelerometerUpdates;
+function stopAccelerometerUpdates() {
+    if (!isListening) {
         throw new Error("Currently not listening for acceleration events.");
     }
     accMnager.stopAccelerometerUpdates();
-    isListeneing = false;
+    isListening = false;
 }
-exports.stopAccelometerUpdates = stopAccelometerUpdates;
+exports.stopAccelerometerUpdates = stopAccelerometerUpdates;

@@ -1,8 +1,8 @@
-export interface AccelomenterData {
+export interface AccelerometerData {
     x: number;
     y: number;
     z: number;
 }
 
-export function startAccelometerUpdates(callback: (AccelomenterData) => void);
-export function stopAccelometerUpdates();
+export function startAccelerometerUpdates(callback: (AccelerometerData) => void);
+export function stopAccelerometerUpdates();

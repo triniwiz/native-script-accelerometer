@@ -8,9 +8,9 @@ tns plugin add nativescript-accelerometer
 
 ## Usage
 ```
-var accelerometer = require("native-script-accelerometer");
+var accelerometer = require("nativescript-accelerometer");
 
-accelerometer.startAccelometerUpdates(function(data) {
+accelerometer.startAccelerometerUpdates(function(data) {
     console.log("x: " + data.x + "y: " + data.y + "z: " + data.z);
 });
 ```

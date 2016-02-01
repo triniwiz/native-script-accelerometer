@@ -3,10 +3,10 @@ var application = require('application');
 var baseAcceleration = 9.81;
 var sensorListener;
 var sensorManager;
-var accelometerSensor;
-function startAccelometerUpdates(callback) {
+var accelerometerSensor;
+function startAccelerometerUpdates(callback) {
     if (sensorListener) {
-        throw new Error("Already listetning for accelometer updates.");
+        throw new Error("Already listening for accelerometer updates.");
     }
     var activity = application.android.foregroundActivity;
     if (!activity) {
@@ -18,10 +18,10 @@ function startAccelometerUpdates(callback) {
             throw Error("Could not initalize SensorManager.");
         }
     }
-    if (!accelometerSensor) {
-        accelometerSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_ACCELEROMETER);
-        if (!accelometerSensor) {
-            throw Error("Could get accelometer sensor.");
+    if (!accelerometerSensor) {
+        accelerometerSensor = sensorManager.getDefaultSensor(android.hardware.Sensor.TYPE_ACCELEROMETER);
+        if (!accelerometerSensor) {
+            throw Error("Could get accelerometer sensor.");
         }
     }
     sensorListener = new android.hardware.SensorEventListener({
@@ -35,14 +35,14 @@ function startAccelometerUpdates(callback) {
             });
         }
     });
-    sensorManager.registerListener(sensorListener, accelometerSensor, android.hardware.SensorManager.SENSOR_DELAY_NORMAL);
+    sensorManager.registerListener(sensorListener, accelerometerSensor, android.hardware.SensorManager.SENSOR_DELAY_NORMAL);
 }
-exports.startAccelometerUpdates = startAccelometerUpdates;
-function stopAccelometerUpdates() {
+exports.startAccelerometerUpdates = startAccelerometerUpdates;
+function stopAccelerometerUpdates() {
     if (!sensorListener) {
         throw new Error("Currently not listening for acceleration events.");
     }
     sensorManager.unregisterListener(sensorListener);
     sensorListener = undefined;
 }
-exports.stopAccelometerUpdates = stopAccelometerUpdates;
+exports.stopAccelerometerUpdates = stopAccelerometerUpdates;
