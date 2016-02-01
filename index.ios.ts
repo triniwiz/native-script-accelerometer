@@ -7,7 +7,7 @@ var accMnager;
 var isListening = false;
 
 export function startAccelerometerUpdates(callback: (AccelerometerData) => void) {
-    if (isListeneing) {
+    if (isListening) {
         throw new Error("Already listening for accelerometer updates.")
     }
 
@@ -26,17 +26,17 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void)
             })
         });
 
-        isListeneing = true;
+        isListening = true;
     } else {
         throw new Error("Accelerometer not available.")
     }
 }
 
 export function stopAccelerometerUpdates() {
-    if (!isListeneing) {
+    if (!isListening) {
         throw new Error("Currently not listening for acceleration events.")
     }
 
     accMnager.stopAccelerometerUpdates();
-    isListeneing = false;
+    isListening = false;
 }
