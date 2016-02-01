@@ -1,6 +1,6 @@
 {
-  "name": "native-script-accelerometer",
-  "version": "0.3.0",
+  "name": "nativescript-accelerometer",
+  "version": "0.3.1",
   "description": "NativeScript accelerometer plugin.",
   "main": "index.js",
   "typings": "index.d.ts",
