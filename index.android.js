@@ -1,6 +1,6 @@
 var application = require('application');
 ;
-var baseAcceleration = 9.81;
+var baseAcceleration = -9.81;
 var sensorListener;
 var sensorManager;
 var accelerometerSensor;

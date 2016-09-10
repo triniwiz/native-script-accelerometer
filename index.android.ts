@@ -2,7 +2,7 @@ import application = require('application');
 declare var android: any;
 interface AccelerometerData { x: number; y: number; z: number };
 
-const baseAcceleration = 9.81;
+const baseAcceleration = -9.81;
 var sensorListener;
 var sensorManager;
 var accelerometerSensor;
