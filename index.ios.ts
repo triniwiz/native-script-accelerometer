@@ -1,3 +1,5 @@
+/// <reference path="./node_modules/tns-core-modules/tns-core-modules.d.ts" /> Needed for autocompletion and compilation.
+
 declare var CMMotionManager: any;
 declare var NSOperationQueue: any;
 
@@ -11,6 +13,8 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void)
         throw new Error("Already listening for accelerometer updates.")
     }
 
+    const wrappedCallback = zonedCallback(callback);
+
     if (!accMnager) {
         accMnager = CMMotionManager.alloc().init();
         accMnager.accelerometerUpdateInterval = 0.1;
@@ -19,7 +23,7 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void)
     if (accMnager.accelerometerAvailable) {
         var queue = NSOperationQueue.alloc().init();
         accMnager.startAccelerometerUpdatesToQueueWithHandler(queue, (data, error) => {
-            callback({
+            wrappedCallback({
                 x: data.acceleration.x,
                 y: data.acceleration.y,
                 z: data.acceleration.z

@@ -1,3 +1,5 @@
+/// <reference path="./node_modules/tns-core-modules/tns-core-modules.d.ts" /> Needed for autocompletion and compilation.
+
 import application = require('application');
 declare var android: any;
 interface AccelerometerData { x: number; y: number; z: number };
@@ -11,6 +13,7 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void)
         throw new Error("Already listening for accelerometer updates.")
     }
 
+    const wrappedCallback = zonedCallback(callback);    
     var activity = application.android.foregroundActivity;
     if (!activity) {
         throw Error("Could not get foregroundActivity.")
@@ -38,7 +41,7 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void)
         onAccuracyChanged: (sensor, accuracy) => {
         },
         onSensorChanged: (event) => {
-            callback({
+            wrappedCallback({
                 x: event.values[0] / baseAcceleration,
                 y: event.values[1] / baseAcceleration,
                 z: event.values[2] / baseAcceleration

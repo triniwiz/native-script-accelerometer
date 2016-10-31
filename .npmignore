@@ -1,0 +1,7 @@
+demo/
+package/
+
+*.tgz
+*.ts
+*.js.map
+!*.d.ts

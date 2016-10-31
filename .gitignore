@@ -1,1 +1,12 @@
 node_modules
+package
+
+demo/platforms
+demo/lib
+demo/node_modules
+
+*.tgz
+*.js
+*.js.map
+
+*.log
