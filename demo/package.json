@@ -6,12 +6,15 @@
   "nativescript": {
     "id": "org.nativescript.demo",
     "tns-android": {
-      "version": "2.3.0"
+      "version": "3.0.0"
+    },
+    "tns-ios": {
+      "version": "3.0.0"
     }
   },
   "dependencies": {
     "nativescript-accelerometer": "file:///Users/vakrilov/Work/Projects/native-script-accelerometer",
-    "tns-core-modules": "2.3.0"
+    "tns-core-modules": "3.0.0"
   },
   "devDependencies": {
     "babel-traverse": "6.18.0",
@@ -19,6 +22,6 @@
     "babylon": "6.13.1",
     "lazy": "1.0.11",
     "nativescript-dev-typescript": "^0.3.2",
-    "typescript": "^2.0.6"
+    "typescript": "^2.2.2"
   }
 }
