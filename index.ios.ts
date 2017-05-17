@@ -17,7 +17,7 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void)
 
     if (!accMnager) {
         accMnager = CMMotionManager.alloc().init();
-        accMnager.accelerometerUpdateInterval = 0.1;
+        accMnager.accelerometerUpdateInterval = 0.5;
     }
 
     if (accMnager.accelerometerAvailable) {

@@ -1,16 +1,29 @@
 {
     "compilerOptions": {
-        "target": "es5",
         "module": "commonjs",
-        "sourceMap": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "noImplicitUseStrict": true,
-        "noEmitHelpers": true,
+        "target": "es5",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
         "declaration": false,
-        "removeComments": false,
+        "noLib": false,
+        "noEmitHelpers": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "noImplicitUseStrict": true,
         "noEmitOnError": true,
-        "noImplicitAny": false
+        "lib": [
+            "es6",
+            "dom"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "./node_modules/tns-core-modules/*",
+                "./node_modules/*"
+            ]
+        }
     },
     "exclude": [
         "node_modules",
