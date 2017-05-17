@@ -13,7 +13,7 @@
     }
   },
   "dependencies": {
-    "nativescript-accelerometer": "file:///Users/shawnpavel/Development/plugins/native-script-accelerometer",
+    "nativescript-accelerometer": "..",
     "tns-core-modules": "3.0.0"
   },
   "devDependencies": {

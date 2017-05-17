@@ -1,6 +1,6 @@
 {
   "name": "nativescript-accelerometer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "NativeScript accelerometer plugin.",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -26,8 +26,12 @@
     }
   },
   "author": {
-    "name": "Alexander Vakrilov"
+    "name": "Alexander Vakrilov <alexander.vakrilov@gmail.com>"
   },
+  "contributors": [
+    "Alexander Vakrilov <alexander.vakrilov@gmail.com>",
+    "Shawn Pavel <shawn@liveshopper.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vakrilov/native-script-accelerometer.git/issues"

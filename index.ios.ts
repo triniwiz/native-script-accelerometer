@@ -1,28 +1,43 @@
-/// <reference path="./node_modules/tns-core-modules/tns-core-modules.d.ts" /> Needed for autocompletion and compilation.
+/// <reference path="./node_modules/tns-platform-declarations/ios.d.ts" /> Needed for autocompletion and compilation.
 
-declare var CMMotionManager: any;
-declare var NSOperationQueue: any;
+import { SensorDelay, AccelerometerOptions, AccelerometerData } from ".";
 
-interface AccelerometerData { x: number; y: number; z: number };
-
-var accMnager;
+var accManager;
 var isListening = false;
 
-export function startAccelerometerUpdates(callback: (AccelerometerData) => void) {
+function getNativeDelay(options?: AccelerometerOptions): number {
+    if (!options || !options.sensorDelay) {
+        return 0.2;
+    }
+
+    switch (options.sensorDelay) {
+        case "normal":
+            return 0.2;
+        case "ui":
+            return 0.06;
+        case "game":
+            return 0.02
+        case "fastest":
+            return 0.001;
+    }
+}
+
+export function startAccelerometerUpdates(callback: (AccelerometerData) => void, options?: AccelerometerOptions) {
     if (isListening) {
         throw new Error("Already listening for accelerometer updates.")
     }
 
     const wrappedCallback = zonedCallback(callback);
 
-    if (!accMnager) {
-        accMnager = CMMotionManager.alloc().init();
-        accMnager.accelerometerUpdateInterval = 0.5;
+    if (!accManager) {
+        accManager = CMMotionManager.alloc().init();
     }
 
-    if (accMnager.accelerometerAvailable) {
+    accManager.accelerometerUpdateInterval = getNativeDelay(options);
+
+    if (accManager.accelerometerAvailable) {
         var queue = NSOperationQueue.alloc().init();
-        accMnager.startAccelerometerUpdatesToQueueWithHandler(queue, (data, error) => {
+        accManager.startAccelerometerUpdatesToQueueWithHandler(queue, (data, error) => {
             wrappedCallback({
                 x: data.acceleration.x,
                 y: data.acceleration.y,
@@ -41,6 +56,6 @@ export function stopAccelerometerUpdates() {
         throw new Error("Currently not listening for acceleration events.")
     }
 
-    accMnager.stopAccelerometerUpdates();
+    accManager.stopAccelerometerUpdates();
     isListening = false;
 }

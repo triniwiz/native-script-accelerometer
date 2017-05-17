@@ -1,19 +1,39 @@
-/// <reference path="./node_modules/tns-core-modules/tns-core-modules.d.ts" /> Needed for autocompletion and compilation.
+/// <reference path="./node_modules/tns-platform-declarations/android.d.ts" /> Needed for autocompletion and compilation.
 
 import application = require('application');
-declare var android: any;
-interface AccelerometerData { x: number; y: number; z: number };
+import { SensorDelay, AccelerometerOptions, AccelerometerData } from ".";
 
 const baseAcceleration = -9.81;
 var sensorListener;
 var sensorManager;
 var accelerometerSensor;
-export function startAccelerometerUpdates(callback: (AccelerometerData) => void) {
+
+function getNativeDelay(options?: AccelerometerOptions): number {
+    if (!options || !options.sensorDelay) {
+        return android.hardware.SensorManager.SENSOR_DELAY_NORMAL;
+    }
+
+    switch (options.sensorDelay) {
+        case "normal":
+            return android.hardware.SensorManager.SENSOR_DELAY_NORMAL;
+
+        case "game":
+            return android.hardware.SensorManager.SENSOR_DELAY_GAME;
+
+        case "ui":
+            return android.hardware.SensorManager.SENSOR_DELAY_UI;
+
+        case "fastest":
+            return android.hardware.SensorManager.SENSOR_DELAY_FASTEST;
+    }
+}
+
+export function startAccelerometerUpdates(callback: (AccelerometerData) => void, options?: AccelerometerOptions) {
     if (sensorListener) {
         throw new Error("Already listening for accelerometer updates.")
     }
 
-    const wrappedCallback = zonedCallback(callback);    
+    const wrappedCallback = zonedCallback(callback);
     var activity = application.android.foregroundActivity;
     if (!activity) {
         throw Error("Could not get foregroundActivity.")
@@ -25,7 +45,7 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void)
         );
 
         if (!sensorManager) {
-            throw Error("Could not initalize SensorManager.")
+            throw Error("Could not initialize SensorManager.")
         }
     }
 
@@ -49,10 +69,11 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void)
         }
     });
 
+    const nativeDelay = getNativeDelay(options);
     sensorManager.registerListener(
         sensorListener,
         accelerometerSensor,
-        android.hardware.SensorManager.SENSOR_DELAY_NORMAL
+        nativeDelay
     );
 }
 

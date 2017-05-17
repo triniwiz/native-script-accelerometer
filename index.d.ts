@@ -4,5 +4,10 @@ export interface AccelerometerData {
     z: number;
 }
 
-export function startAccelerometerUpdates(callback: (AccelerometerData) => void);
+export type SensorDelay = "normal" | "game" | "ui" | "fastest";
+export interface AccelerometerOptions {
+    sensorDelay?: SensorDelay;
+}
+
+export function startAccelerometerUpdates(callback: (AccelerometerData) => void, options?: AccelerometerOptions);
 export function stopAccelerometerUpdates();

@@ -17,6 +17,6 @@ export function navigatingTo(args: EventData) {
       context.set("x", data.x.toFixed(4));
       context.set("y", data.y.toFixed(4));
       context.set("z", data.z.toFixed(4));
-    });
+    }, { sensorDelay: "ui" });
   }
 }
