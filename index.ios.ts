@@ -2,8 +2,9 @@
 
 import { SensorDelay, AccelerometerOptions, AccelerometerData } from ".";
 
-var accManager;
-var isListening = false;
+let accManager;
+let isListening = false;
+let main_queue = dispatch_get_current_queue();
 
 function getNativeDelay(options?: AccelerometerOptions): number {
     if (!options || !options.sensorDelay) {
@@ -38,10 +39,12 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void,
     if (accManager.accelerometerAvailable) {
         var queue = NSOperationQueue.alloc().init();
         accManager.startAccelerometerUpdatesToQueueWithHandler(queue, (data, error) => {
-            wrappedCallback({
-                x: data.acceleration.x,
-                y: data.acceleration.y,
-                z: data.acceleration.z
+            dispatch_async(main_queue, () => {
+                wrappedCallback({
+                    x: data.acceleration.x,
+                    y: data.acceleration.y,
+                    z: data.acceleration.z
+                })
             })
         });
 
