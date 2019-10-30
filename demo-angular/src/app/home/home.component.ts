@@ -10,11 +10,18 @@ import { AccelerometerService } from "../accelerometer.service";
 export class HomeComponent implements OnInit {
     data$: Observable<AccelerometerData>
     constructor(public accService: AccelerometerService) {
-        // Use the component constructor to inject providers.
-        this.data$ = accService.data$; 
+        this.data$ = accService.data$;
     }
 
     ngOnInit(): void {
         this.accService.start();
+    }
+
+    toggleUpdates() {
+        if (this.accService.isListening()) {
+            this.accService.stop();
+        } else {
+            this.accService.start();
+        }
     }
 }

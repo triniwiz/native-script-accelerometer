@@ -1,4 +1,8 @@
 <Page class="page" navigatingTo="navigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
+    <ActionBar class="action-bar">
+        <Label class="action-bar-title" text="Accelerometer Demo"></Label>
+    </ActionBar>
+
     <GridLayout rows="auto auto auto auto auto auto auto" columns="auto * auto" padding="16">
 
         <Label row="0" col="0" text="-1" />
@@ -16,6 +20,6 @@
         <Label row="4" col="2" text="-1" />
         <Progress row="5" colSpan="3" value="{{ z * 50 + 50}}" />
 
-        <Button colSpan="3" row="6" text="{{ isListening ? 'stop updates' : ' start updates'}}" tap="toggleUpdates" />
+        <Button colSpan="3" row="6" text="{{ isListening ? 'stop updates' : 'start updates'}}" tap="toggleUpdates" />
     </GridLayout>
 </Page>

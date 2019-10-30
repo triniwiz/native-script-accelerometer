@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { startAccelerometerUpdates, AccelerometerData, stopAccelerometerUpdates } from "nativescript-accelerometer";
+import { startAccelerometerUpdates, AccelerometerData, stopAccelerometerUpdates, isListening } from "nativescript-accelerometer";
 import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
@@ -17,16 +17,22 @@ export class AccelerometerService implements OnDestroy {
     start() {
         startAccelerometerUpdates((data) => {
             // console.dir(data);
-            this._data$.next(data);  
-        });
+            this._data$.next(data);
+        }, { sensorDelay: "ui" });
     }
 
     stop() {
         stopAccelerometerUpdates();
     }
 
+    isListening() {
+        return isListening();
+    }
+
     ngOnDestroy() {
         console.log("AccelerometerService.ngOnDestroy()")
-        this.stop();
+        if (this.isListening()) {
+            this.stop();
+        }
     }
 }
