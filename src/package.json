@@ -53,7 +53,7 @@
     "demo-angular.ios": "npm run tsc && cd ../demo-angular && tns run ios",
     "demo-angular.android": "npm run tsc && cd ../demo-angular && tns run android",
     "demo-angular.reset": "cd ../demo-angular && npx rimraf -- hooks node_modules platforms package-lock.json",
-    "plugin.prepare": "npm run build && cd ../demo && tns plugin remove nativescript-nativescript-accelerometer && tns plugin add ../src && cd ../demo-angular && tns plugin remove nativescript-nativescript-accelerometer && tns plugin add ../src",
+    "plugin.prepare": "npm run build && cd ../demo && tns plugin remove nativescript-accelerometer && tns plugin add ../src && cd ../demo-angular && tns plugin remove nativescript-accelerometer && tns plugin add ../src",
     "clean": "npm run demo.reset && npm run demo-angular.reset && npx rimraf -- node_modules package-lock.json && npm i"
   }
 }

@@ -1,0 +1,7 @@
+<Page class="page" navigatingTo="navigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
+    <StackLayout>
+        <Label text="{{ x, 'X: ' + x }}"/>
+        <Label text="{{ y, 'Y: ' + y }}"/>
+        <Label text="{{ z, 'Z: ' + z }}"/>
+    </StackLayout>
+</Page>

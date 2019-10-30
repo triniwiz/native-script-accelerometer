@@ -1,6 +1,6 @@
 /// <reference path="./node_modules/tns-platform-declarations/android.d.ts" /> Needed for autocompletion and compilation.
 
-import application = require('application');
+import { android as androidApp } from "tns-core-modules/application";
 import { SensorDelay, AccelerometerOptions, AccelerometerData } from ".";
 
 const baseAcceleration = -9.81;
@@ -34,7 +34,7 @@ export function startAccelerometerUpdates(callback: (AccelerometerData) => void,
     }
 
     const wrappedCallback = zonedCallback(callback);
-    var activity = application.android.foregroundActivity;
+    var activity = androidApp.foregroundActivity;
     if (!activity) {
         throw Error("Could not get foregroundActivity.")
     }
