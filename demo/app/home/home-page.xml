@@ -3,5 +3,9 @@
         <Label text="{{ x, 'X: ' + x }}"/>
         <Label text="{{ y, 'Y: ' + y }}"/>
         <Label text="{{ z, 'Z: ' + z }}"/>
+        
+        <Button text="start updates" tap="startUpdates" />
+        <Button text="stop updates" tap="stopUpdates" />
+        
     </StackLayout>
 </Page>

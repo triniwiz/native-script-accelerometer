@@ -28,7 +28,7 @@ function getNativeDelay(options?: AccelerometerOptions): number {
     }
 }
 
-export function startAccelerometerUpdates(callback: (AccelerometerData) => void, options?: AccelerometerOptions) {
+export function startAccelerometerUpdates(callback: (data: AccelerometerData) => void, options?: AccelerometerOptions) {
     if (sensorListener) {
         throw new Error("Already listening for accelerometer updates.")
     }
