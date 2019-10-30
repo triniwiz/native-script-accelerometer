@@ -1,6 +1,6 @@
 /// <reference path="./node_modules/tns-platform-declarations/android.d.ts" /> Needed for autocompletion and compilation.
 
-import { android as androidApp } from "tns-core-modules/application";
+import { ad as androidUtils } from "tns-core-modules/utils/utils";
 import { AccelerometerOptions, AccelerometerData } from ".";
 import { startButNotStopped, stopButNotStarted } from "./messages";
 
@@ -36,13 +36,13 @@ export function startAccelerometerUpdates(callback: (data: AccelerometerData) =>
     }
 
     const wrappedCallback = zonedCallback(callback);
-    const activity: android.app.Activity = androidApp.context;
-    if (!activity) {
-        throw Error("Could not get context.")
+    const context: android.content.Context = androidUtils.getApplicationContext();
+    if (!context) {
+        throw Error("Could not get Android application context.")
     }
 
     if (!sensorManager) {
-        sensorManager = activity.getSystemService(android.content.Context.SENSOR_SERVICE);
+        sensorManager = context.getSystemService(android.content.Context.SENSOR_SERVICE);
 
         if (!sensorManager) {
             throw Error("Could not initialize SensorManager.")
