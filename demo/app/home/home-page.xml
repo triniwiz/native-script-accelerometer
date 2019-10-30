@@ -1,11 +1,21 @@
 <Page class="page" navigatingTo="navigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
-    <StackLayout>
-        <Label text="{{ x, 'X: ' + x }}"/>
-        <Label text="{{ y, 'Y: ' + y }}"/>
-        <Label text="{{ z, 'Z: ' + z }}"/>
-        
-        <Button text="start updates" tap="startUpdates" />
-        <Button text="stop updates" tap="stopUpdates" />
-        
-    </StackLayout>
+    <GridLayout rows="auto auto auto auto auto auto auto" columns="auto * auto" padding="16">
+
+        <Label row="0" col="0" text="-1" />
+        <Label row="0" col="1" text="{{ x, 'x: ' + x }}" horizontalAlignment="center"/>
+        <Label row="0" col="2" text="-1" />
+        <Progress row="1" colSpan="3" value="{{ x * 50 + 50}}" />
+
+        <Label row="2" col="0" text="-1" />
+        <Label row="2" col="1" text="{{ y, 'y: ' + y }}" horizontalAlignment="center"/>
+        <Label row="2" col="2" text="-1" />
+        <Progress row="3" colSpan="3" value="{{ y * 50 + 50}}" />
+
+        <Label row="4" col="0" text="-1" />
+        <Label row="4" col="1" text="{{ z, 'z: ' + z }}" horizontalAlignment="center"/>
+        <Label row="4" col="2" text="-1" />
+        <Progress row="5" colSpan="3" value="{{ z * 50 + 50}}" />
+
+        <Button colSpan="3" row="6" text="{{ isListening ? 'stop updates' : ' start updates'}}" tap="toggleUpdates" />
+    </GridLayout>
 </Page>

@@ -9,5 +9,6 @@ export interface AccelerometerOptions {
     sensorDelay?: SensorDelay;
 }
 
-export function startAccelerometerUpdates(callback: (data: AccelerometerData) => void, options?: AccelerometerOptions);
-export function stopAccelerometerUpdates();
+export function startAccelerometerUpdates(callback: (data: AccelerometerData) => void, options?: AccelerometerOptions): void;
+export function stopAccelerometerUpdates(): void;
+export function isListening(): boolean;

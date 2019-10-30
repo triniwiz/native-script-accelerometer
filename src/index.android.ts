@@ -1,12 +1,13 @@
 /// <reference path="./node_modules/tns-platform-declarations/android.d.ts" /> Needed for autocompletion and compilation.
 
 import { android as androidApp } from "tns-core-modules/application";
-import { SensorDelay, AccelerometerOptions, AccelerometerData } from ".";
+import { AccelerometerOptions, AccelerometerData } from ".";
+import { startButNotStopped, stopButNotStarted } from "./messages";
 
 const baseAcceleration = -9.81;
-var sensorListener;
-var sensorManager;
-var accelerometerSensor;
+var sensorListener: android.hardware.SensorEventListener;
+var sensorManager: android.hardware.SensorManager;
+var accelerometerSensor: android.hardware.Sensor;
 
 function getNativeDelay(options?: AccelerometerOptions): number {
     if (!options || !options.sensorDelay) {
@@ -29,20 +30,19 @@ function getNativeDelay(options?: AccelerometerOptions): number {
 }
 
 export function startAccelerometerUpdates(callback: (data: AccelerometerData) => void, options?: AccelerometerOptions) {
-    if (sensorListener) {
-        throw new Error("Already listening for accelerometer updates.")
+    if (isListening()) {
+        console.log(startButNotStopped);
+        stopAccelerometerUpdates();
     }
 
     const wrappedCallback = zonedCallback(callback);
-    var activity = androidApp.foregroundActivity;
+    const activity: android.app.Activity = androidApp.context;
     if (!activity) {
-        throw Error("Could not get foregroundActivity.")
+        throw Error("Could not get context.")
     }
 
     if (!sensorManager) {
-        sensorManager = activity.getSystemService(
-            android.content.Context.SENSOR_SERVICE
-        );
+        sensorManager = activity.getSystemService(android.content.Context.SENSOR_SERVICE);
 
         if (!sensorManager) {
             throw Error("Could not initialize SensorManager.")
@@ -78,10 +78,14 @@ export function startAccelerometerUpdates(callback: (data: AccelerometerData) =>
 }
 
 export function stopAccelerometerUpdates() {
-    if (!sensorListener) {
-        throw new Error("Currently not listening for acceleration events.")
+    if (sensorListener) {
+        sensorManager.unregisterListener(sensorListener);
+        sensorListener = undefined;
+    } else {
+        console.log(stopButNotStarted);
     }
+}
 
-    sensorManager.unregisterListener(sensorListener);
-    sensorListener = undefined;
+export function isListening(): boolean {
+    return !!sensorListener;
 }

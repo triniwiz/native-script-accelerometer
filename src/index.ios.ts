@@ -1,9 +1,10 @@
 /// <reference path="./node_modules/tns-platform-declarations/ios.d.ts" /> Needed for autocompletion and compilation.
 
-import { SensorDelay, AccelerometerOptions, AccelerometerData } from ".";
+import { AccelerometerOptions, AccelerometerData } from ".";
+import { startButNotStopped, stopButNotStarted } from "./messages";
 
 let accManager;
-let isListening = false;
+let isListeningForUpdates = false;
 let main_queue = dispatch_get_current_queue();
 
 function getNativeDelay(options?: AccelerometerOptions): number {
@@ -24,8 +25,9 @@ function getNativeDelay(options?: AccelerometerOptions): number {
 }
 
 export function startAccelerometerUpdates(callback: (data: AccelerometerData) => void, options?: AccelerometerOptions) {
-    if (isListening) {
-        throw new Error("Already listening for accelerometer updates.")
+    if (isListeningForUpdates) {
+        console.log(startButNotStopped);
+        stopAccelerometerUpdates();
     }
 
     const wrappedCallback = zonedCallback(callback);
@@ -48,17 +50,21 @@ export function startAccelerometerUpdates(callback: (data: AccelerometerData) =>
             })
         });
 
-        isListening = true;
+        isListeningForUpdates = true;
     } else {
         throw new Error("Accelerometer not available.")
     }
 }
 
 export function stopAccelerometerUpdates() {
-    if (!isListening) {
-        throw new Error("Currently not listening for acceleration events.")
+    if (isListeningForUpdates) {
+        accManager.stopAccelerometerUpdates();
+        isListeningForUpdates = false;
+    } else {
+        console.log(stopButNotStarted);
     }
+}
 
-    accManager.stopAccelerometerUpdates();
-    isListening = false;
+export function isListening(): boolean {
+    return isListeningForUpdates;
 }
