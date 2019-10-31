@@ -6,8 +6,6 @@ Accelerometer plugin for NativeScript
 tns plugin add nativescript-accelerometer
 ```
 
-This plugin is compatible with both NativeScript `2.x` and `3.x` versions.
-
 ## Usage
 ```
 var accelerometer = require("nativescript-accelerometer");
