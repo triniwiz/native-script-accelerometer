@@ -6,10 +6,11 @@
 *.js
 *.js.map
 *.log
+*.tgz
 
 node_modules
 publish/src
-publish/package
+publish/package/**/*
 
 src/*.d.ts
 !src/index.d.ts
