@@ -16,7 +16,12 @@ export function navigatingTo(args: EventData) {
     let page = <Page>args.object;
     page.bindingContext = context;
 
-    startAccelerometerUpdates(update, { sensorDelay: "ui" });
+    try {
+        startAccelerometerUpdates(update, { sensorDelay: "ui" });
+    } catch (e) {
+        alert("Error: " + e.message);
+    }
+
     context.set("isListening", isListening());
 }
 
@@ -24,7 +29,11 @@ export function toggleUpdates() {
     if (isListening()) {
         stopAccelerometerUpdates();
     } else {
-        startAccelerometerUpdates(update, { sensorDelay: "ui" });
+        try {
+            startAccelerometerUpdates(update, { sensorDelay: "ui" });
+        } catch (e) {
+            alert("Error: " + e.message);
+        }
     }
 
     context.set("isListening", isListening());

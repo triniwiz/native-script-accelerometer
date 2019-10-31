@@ -1,14 +1,11 @@
-<Page class="page" navigatingTo="navigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
-    <ActionBar class="action-bar">
-        <Label class="action-bar-title" text="Accelerometer Demo"></Label>
-    </ActionBar>
+<Page navigatingTo="navigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
+    <ActionBar title="Accelerometer Demo" />
 
-    <GridLayout rows="auto auto auto auto auto auto auto" columns="auto * auto" padding="16">
-
+    <GridLayout rows="auto auto auto auto auto auto auto" columns="auto * auto">
         <Label row="0" col="0" text="-1" />
         <Label row="0" col="1" text="{{ x, 'x: ' + x }}" horizontalAlignment="center"/>
         <Label row="0" col="2" text="-1" />
-        <Progress row="1" colSpan="3" value="{{ x * 50 + 50}}" />
+        <Progress row="1" colSpan="3" class="meter" value="{{ x * 50 + 50}}" />
 
         <Label row="2" col="0" text="-1" />
         <Label row="2" col="1" text="{{ y, 'y: ' + y }}" horizontalAlignment="center"/>
@@ -20,6 +17,6 @@
         <Label row="4" col="2" text="-1" />
         <Progress row="5" colSpan="3" value="{{ z * 50 + 50}}" />
 
-        <Button colSpan="3" row="6" text="{{ isListening ? 'stop updates' : 'start updates'}}" tap="toggleUpdates" />
+        <Button colSpan="3" row="6" class="-primary" text="{{ isListening ? 'stop updates' : 'start updates'}}" tap="toggleUpdates" />
     </GridLayout>
 </Page>

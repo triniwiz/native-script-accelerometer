@@ -1,8 +1,6 @@
-<ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Accelerometer Demo NG"></Label>
-</ActionBar>
+<ActionBar class="action-bar" title="Accelerometer Demo NG"></ActionBar>
 
-<GridLayout class="page" rows="auto auto auto auto auto auto auto" columns="auto * auto" padding="16" *ngIf="data$ | async as data">
+<GridLayout class="container" rows="auto auto auto auto auto auto auto" columns="auto * auto" *ngIf="data$ | async as data">
 
     <Label row="0" col="0" text="-1"></Label>
     <Label row="0" col="1" [text]="'x: ' + data.x.toFixed(2)" horizontalAlignment="center"></Label>
@@ -19,5 +17,5 @@
     <Label row="4" col="2" text="-1" ></Label>
     <Progress row="5" colSpan="3" [value]="data.z * 50 + 50"></Progress>
 
-    <Button colSpan="3" row="6" [text]="accService.isListening() ? 'stop updates' : 'start updates'" (tap)="toggleUpdates()"></Button>
+    <Button colSpan="3" row="6" class="-primary" [text]="accService.isListening() ? 'stop updates' : 'start updates'" (tap)="toggleUpdates()"></Button>
 </GridLayout>
