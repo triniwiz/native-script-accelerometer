@@ -1,0 +1,22 @@
+<Page navigatingTo="navigatingTo" xmlns="http://schemas.nativescript.org/tns.xsd">
+    <ActionBar title="Accelerometer Demo" />
+
+    <GridLayout rows="auto auto auto auto auto auto auto" columns="auto * auto">
+        <Label row="0" col="0" text="-1" />
+        <Label row="0" col="1" text="{{ x, 'x: ' + x }}" horizontalAlignment="center"/>
+        <Label row="0" col="2" text="-1" />
+        <Progress row="1" colSpan="3" class="meter" value="{{ x * 50 + 50}}" />
+
+        <Label row="2" col="0" text="-1" />
+        <Label row="2" col="1" text="{{ y, 'y: ' + y }}" horizontalAlignment="center"/>
+        <Label row="2" col="2" text="-1" />
+        <Progress row="3" colSpan="3" value="{{ y * 50 + 50}}" />
+
+        <Label row="4" col="0" text="-1" />
+        <Label row="4" col="1" text="{{ z, 'z: ' + z }}" horizontalAlignment="center"/>
+        <Label row="4" col="2" text="-1" />
+        <Progress row="5" colSpan="3" value="{{ z * 50 + 50}}" />
+
+        <Button colSpan="3" row="6" class="-primary" text="{{ isListening ? 'stop updates' : 'start updates'}}" tap="toggleUpdates" />
+    </GridLayout>
+</Page>

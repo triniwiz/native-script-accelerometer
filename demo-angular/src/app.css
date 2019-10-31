@@ -1,0 +1,16 @@
+@import "~@nativescript/theme/css/core.css";
+@import "~@nativescript/theme/css/default.css";
+
+.container {
+    margin: 16;
+}
+
+Button.-primary {
+    font-size: 18;
+}
+
+Progress {
+    transform: scaleY(3);
+    vertical-align: middle;
+    margin: 2 0 24 0;
+}
