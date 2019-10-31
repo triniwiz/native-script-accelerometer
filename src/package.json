@@ -38,6 +38,7 @@
     "tns-core-modules": ">2.0.0"
   },
   "devDependencies": {
+    "conventional-changelog-cli": "^2.0.25",
     "tns-core-modules": ">2.0.0",
     "tns-platform-declarations": ">2.0.0",
     "typescript": "~3.6.4"
@@ -54,6 +55,7 @@
     "demo-angular.android": "cd ../demo-angular && tns run android",
     "demo-angular.reset": "cd ../demo-angular && npx rimraf -- hooks node_modules platforms package-lock.json",
     "plugin.prepare": "npm run build && cd ../demo && tns plugin remove nativescript-accelerometer && tns plugin add ../src && cd ../demo-angular && tns plugin remove nativescript-accelerometer && tns plugin add ../src",
-    "clean": "npm run demo.reset && npm run demo-angular.reset && npx rimraf -- node_modules package-lock.json && npm i"
+    "clean": "npm run demo.reset && npm run demo-angular.reset && npx rimraf -- node_modules package-lock.json && npm i",
+    "version": "conventional-changelog -p angular -i ../CHANGELOG.md -s && git add ../CHANGELOG.md"
   }
 }
