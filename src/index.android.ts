@@ -1,7 +1,7 @@
 /// <reference path="./node_modules/tns-platform-declarations/android.d.ts" /> Needed for autocompletion and compilation.
 
-import { ad as androidUtils } from "tns-core-modules/utils/utils";
-import { AccelerometerOptions, AccelerometerData } from ".";
+import { Utils } from '@nativescript/core';
+import { AccelerometerData, AccelerometerOptions } from ".";
 import { startButNotStopped, stopButNotStarted } from "./messages";
 
 const baseAcceleration = -9.81;
@@ -36,7 +36,7 @@ export function startAccelerometerUpdates(callback: (data: AccelerometerData) =>
     }
 
     const wrappedCallback = zonedCallback(callback);
-    const context: android.content.Context = androidUtils.getApplicationContext();
+    const context = Utils.android.getApplicationContext();
     if (!context) {
         throw Error("Could not get Android application context.")
     }
