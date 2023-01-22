@@ -29,10 +29,5 @@
         "node_modules",
         "platforms",
         "demo"
-    ],
-    "include": [
-        "index.android.ts",
-        "index.ios.ts",
-        "messages.ts"
     ]
 }
